@@ -52,4 +52,7 @@ public class ParentContoller {
     public void deleteParent(@PathVariable Long id) {
         parentRepository.delete(parentRepository.findById(id).get());
     }
+
+
+
 }
