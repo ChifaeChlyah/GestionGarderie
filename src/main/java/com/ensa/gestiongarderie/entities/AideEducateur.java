@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class aideEducateur {
+public class AideEducateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
