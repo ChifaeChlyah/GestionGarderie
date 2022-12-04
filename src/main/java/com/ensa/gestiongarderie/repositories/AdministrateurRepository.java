@@ -8,4 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface AdministrateurRepository extends JpaRepository<Administrateur,Long> {
+
+    public Administrateur findByEmail(String email);
 }
