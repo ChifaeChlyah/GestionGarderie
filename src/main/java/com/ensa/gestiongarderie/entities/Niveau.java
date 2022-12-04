@@ -17,7 +17,7 @@ import java.util.List;
 public class Niveau {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nom;
     private int minAge;
     private int maxAge;
@@ -29,4 +29,6 @@ public class Niveau {
     @OneToMany(mappedBy = "niveau")
     private List<AideEducateur> aideEducateurs=new ArrayList<>();
 
+    @OneToMany(mappedBy = "niveau")
+    private List<Enfant> enfants=new ArrayList<>();
 }

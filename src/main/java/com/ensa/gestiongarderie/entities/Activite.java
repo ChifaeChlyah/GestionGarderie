@@ -14,7 +14,7 @@ import java.util.List;
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nom;
     private String description;
     private double prix;

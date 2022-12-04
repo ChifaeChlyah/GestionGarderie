@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class AideEducateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nom;
     private String prenom;
     private String telephone;

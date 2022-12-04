@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity @Data @AllArgsConstructor  @NoArgsConstructor
 public class Parent {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
+    private Long id ;
     private String  cne  ;
     private String  nom ;
     private String prenom ;

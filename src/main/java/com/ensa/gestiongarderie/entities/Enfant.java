@@ -10,7 +10,7 @@ import java.util.List;
 @Entity @Data @AllArgsConstructor @NoArgsConstructor
 public class Enfant {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
+    private Long id ;
     private String nom ;
     private String prenom ;
     int age;
