@@ -6,25 +6,56 @@ import com.ensa.gestiongarderie.repositories.EnfantRepository;
 import com.ensa.gestiongarderie.repositories.ParentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping(path="/enfant")
+@RestController
 public class EnfantController {
     @Autowired
     EnfantRepository enfantRepository;
 
-    @PostMapping()
-    public Enfant add(@RequestBody Enfant  e ){
-        return  enfantRepository.save(e);
+
+
+    @GetMapping()
+    public List<Enfant> allEnfant()
+    {
+        return enfantRepository.findAll();
     }
 
-//    @GetMapping
-//    public List<Enfant>
 
+    @GetMapping(path="/parent/{id}")
+    public Parent enfant(@PathVariable("id") Long idEnfant)
+    {
+        return enfantRepository.findById(idEnfant).get().getParent();
+    }
+
+
+    @GetMapping(path="/{id}")
+    public Enfant getparent(@PathVariable("id")Long id )
+    {
+        return enfantRepository.findById(id).get();
+    }
+
+    @PostMapping()
+    public boolean addEnfant(@RequestBody Enfant enf)
+    {
+        if(enfantRepository.findById(enf.getId()).isPresent())
+            return false;
+        enfantRepository.save(enf);
+        return true;
+    }
+
+    @DeleteMapping(path="/{id}")
+    public void deleteEnfant(@PathVariable("id") long id){
+       enfantRepository.deleteById(id);
+    }
+
+    @PutMapping()
+    public Enfant updateParent(@RequestBody Enfant e)
+    {
+        return enfantRepository.save(e);
+    }
 
 }

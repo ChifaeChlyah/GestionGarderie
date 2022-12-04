@@ -16,7 +16,7 @@ import java.util.Date;
 public class CarteDeCredit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String numeroCarte;
     private String cryptogramme;
     private Date DateExpiration;
