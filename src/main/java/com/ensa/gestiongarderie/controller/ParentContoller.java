@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -16,24 +18,24 @@ public class ParentContoller {
 
     @Autowired
     ParentRepository parentRepository;
-    @GetMapping(path="/tousLesParents")
+    @GetMapping(path="/")
     public List<Parent> tousLesParents()
     {
         return parentRepository.findAll();
     }
-    @GetMapping(path="/enfant/{id}")
+    @GetMapping(path="/enfantByParentId/{id}")
     public Enfant enfant(@PathVariable("id") Long idParent)
     {
         return parentRepository.findById(idParent).get().getEnfant();
     }
-    @GetMapping(path="/parent/{id}")
+    @GetMapping(path="/{id}")
     public Parent getparent(@PathVariable("id")Long idParent)
     {
         return parentRepository.findById(idParent).get();
     }
 
-    @PostMapping(path="/add-parent")
-    public boolean addPortfeuille(@RequestBody Parent parent)
+    @PostMapping(path="/")
+    public boolean addParent(@RequestBody Parent parent)
     {
         if(parentRepository.findById(parent.getId()).isPresent())
             return false;
@@ -41,9 +43,13 @@ public class ParentContoller {
         return true;
     }
 
-    @PutMapping(path="/update-parent")
+    @PutMapping(path="/")
     public Parent updateParent(@RequestBody Parent parent)
     {
         return parentRepository.save(parent);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteParent(@PathVariable Long id) {
+        parentRepository.delete(parentRepository.findById(id).get());
     }
 }
