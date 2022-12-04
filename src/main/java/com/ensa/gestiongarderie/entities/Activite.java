@@ -17,7 +17,6 @@ public class Activite {
     private long id;
     private String nom;
     private String description;
-    private double prix;
 
     @ManyToOne
     private Niveau niveau;

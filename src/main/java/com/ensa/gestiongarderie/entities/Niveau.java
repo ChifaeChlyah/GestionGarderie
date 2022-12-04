@@ -21,6 +21,7 @@ public class Niveau {
     private String nom;
     private int minAge;
     private int maxAge;
+    private double prix;
 
     @OneToMany(mappedBy = "niveau")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

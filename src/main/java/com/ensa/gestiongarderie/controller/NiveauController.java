@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/parent")
+@RequestMapping("/niveau")
 public class NiveauController {
     @Autowired
     NiveauRepository niveauRepository;
-    @GetMapping(path="/")
+    @GetMapping()
     public List<Niveau> tousLesNiveaux()
     {
         return niveauRepository.findAll();
     }
 
-    @PostMapping(path="/")
+    @PostMapping()
     public boolean addParent(@RequestBody Niveau niveau)
     {
         if(niveauRepository.findById(niveau.getId()).isPresent())

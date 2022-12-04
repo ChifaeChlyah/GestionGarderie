@@ -18,4 +18,5 @@ public class Paypal {
     private long id;
     private String identifiant;
     private String password;
+    private double solde;
 }

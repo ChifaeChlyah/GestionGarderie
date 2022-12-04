@@ -18,7 +18,7 @@ public class ParentContoller {
 
     @Autowired
     ParentRepository parentRepository;
-    @GetMapping(path="/")
+    @GetMapping()
     public List<Parent> tousLesParents()
     {
         return parentRepository.findAll();
@@ -34,7 +34,7 @@ public class ParentContoller {
         return parentRepository.findById(idParent).get();
     }
 
-    @PostMapping(path="/")
+    @PostMapping()
     public boolean addParent(@RequestBody Parent parent)
     {
         if(parentRepository.findById(parent.getId()).isPresent())
@@ -43,7 +43,7 @@ public class ParentContoller {
         return true;
     }
 
-    @PutMapping(path="/")
+    @PutMapping()
     public Parent updateParent(@RequestBody Parent parent)
     {
         return parentRepository.save(parent);

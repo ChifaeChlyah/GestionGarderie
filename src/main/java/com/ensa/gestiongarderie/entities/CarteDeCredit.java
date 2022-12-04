@@ -20,4 +20,5 @@ public class CarteDeCredit {
     private String numeroCarte;
     private String cryptogramme;
     private Date DateExpiration;
+    private double solde;
 }
