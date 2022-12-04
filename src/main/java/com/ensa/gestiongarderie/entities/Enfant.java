@@ -1,4 +1,4 @@
-package Entities;
+package com.ensa.gestiongarderie.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,15 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity @Data @AllArgsConstructor  @NoArgsConstructor
-public class Parent {
+@Entity @Data @AllArgsConstructor @NoArgsConstructor
+public class Enfant {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
-    private  String  cne  ;
-    private  String  nom;
-    private  String prenom ;
-    private  String email ;
-    private  String  tel ;
-
+    String id ;
+    String nom ;
+    String prenom ;
 
 }
