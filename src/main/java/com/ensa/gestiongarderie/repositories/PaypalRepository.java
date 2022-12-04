@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface PaypalRepository extends JpaRepository<Paypal,Long> {
+    public Paypal findByIdentifiant(String identifiant);
 }

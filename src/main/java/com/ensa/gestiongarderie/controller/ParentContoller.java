@@ -54,6 +54,7 @@ public class ParentContoller {
         parentRepository.delete(parentRepository.findById(id).get());
     }
 
+
     @PostMapping(path="payer/{id}")
     public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
     {
@@ -62,5 +63,4 @@ public class ParentContoller {
         if(paymentStrategy.payer(prix))
             parent.setStatutPayement(true);
     }
-
 }

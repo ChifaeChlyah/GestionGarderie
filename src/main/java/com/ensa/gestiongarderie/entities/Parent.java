@@ -15,7 +15,7 @@ public class Parent {
     private String email ;
     private String motDePasse;
     private String  tel ;
-    private boolean statutPayement;
+    private boolean statutPayement=false;
 
     @OneToOne(mappedBy = "parent")
     Enfant enfant;

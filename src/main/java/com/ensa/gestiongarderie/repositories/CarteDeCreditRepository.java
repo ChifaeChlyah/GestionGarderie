@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface CarteDeCreditRepository extends JpaRepository<CarteDeCredit,Long> {
+    public CarteDeCredit findByNumeroCarte(String numeroCarte);
 }
