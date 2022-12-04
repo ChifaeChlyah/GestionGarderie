@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Paypal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String identifiant;
     private String password;
 }
