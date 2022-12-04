@@ -13,10 +13,11 @@ public class Parent {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
     private  String  cne  ;
-    private  String  nom;
+    private  String  nom ;
     private  String prenom ;
     private  String email ;
     private  String  tel ;
+
 
 
 }
