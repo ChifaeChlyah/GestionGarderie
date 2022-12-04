@@ -4,6 +4,7 @@ package com.ensa.gestiongarderie.controller;
 import com.ensa.gestiongarderie.entities.Enfant;
 import com.ensa.gestiongarderie.entities.Parent;
 import com.ensa.gestiongarderie.repositories.ParentRepository;
+import com.ensa.gestiongarderie.services.PaymentStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -52,4 +53,14 @@ public class ParentContoller {
     public void deleteParent(@PathVariable Long id) {
         parentRepository.delete(parentRepository.findById(id).get());
     }
+
+    @PostMapping(path="payer/{id}")
+    public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
+    {
+        Parent parent=parentRepository.findById(idParent).get();
+        double prix=parent.getEnfant().getNiveau().getPrix();
+        if(paymentStrategy.payer(prix))
+            parent.setStatutPayement(true);
+    }
+
 }

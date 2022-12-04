@@ -15,7 +15,7 @@ public class PaypalStrategy implements PaymentStrategy {
     }
 
     @Override
-    public void payer(double prix) {
-
+    public boolean payer(double prix) {
+        return true;
     }
 }
