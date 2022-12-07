@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.mapping.Bag;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Data
@@ -19,7 +22,7 @@ public class EnfantAutiste extends EnfantSpecial{
 
     @OneToMany
     @JoinTable(name = "enfant_activites_autisme")
-    private ArrayList<Activite> activitesSpeciales_autisme=new ArrayList<>();
+    private Collection<Activite> activitesSpeciales_autisme=new ArrayList<>();
 
     public EnfantAutiste(Enfant enfant) {
         super(enfant);

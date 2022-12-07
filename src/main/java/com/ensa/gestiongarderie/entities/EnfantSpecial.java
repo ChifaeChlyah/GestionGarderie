@@ -1,6 +1,8 @@
 package com.ensa.gestiongarderie.entities;
 
 import com.ensa.gestiongarderie.repositories.EnfantRepository;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 public abstract class EnfantSpecial extends Enfant{
+    @OneToOne @Nullable
     Enfant enfant;
-    final Double tarifPyschologue=1000.;
+    Double tarifPyschologue;
     public EnfantSpecial() {
     }
 
@@ -31,27 +34,32 @@ public abstract class EnfantSpecial extends Enfant{
     @Override
     public void setNom(String nom) {
         super.setNom(nom);
-        enfant.setNom(nom);
+        if(enfant!=null)
+            enfant.setNom(nom);
     } 
     @Override
     public void setPrenom(String prenom) {
         super.setPrenom(prenom);
-        enfant.setPrenom(prenom);
+        if(enfant!=null)
+            enfant.setPrenom(prenom);
     }
     @Override
     public void setAge(int age) {
         super.setAge(age);
-        enfant.setAge(age);
+        if(enfant!=null)
+            enfant.setAge(age);
     }
     @Override
     public void setNiveau(Niveau niveau) {
         super.setNiveau(niveau);
-        enfant.setNiveau(niveau);
+        if(enfant!=null)
+            enfant.setNiveau(niveau);
     }
     @Override
     public void setParent(Parent parent) {
         super.setParent(parent);
-        enfant.setParent(parent);
+        if(enfant!=null)
+            enfant.setParent(parent);
     }
 
     public Enfant getEnfant()

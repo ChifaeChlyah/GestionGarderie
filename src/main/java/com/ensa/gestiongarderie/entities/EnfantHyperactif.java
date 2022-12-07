@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -20,7 +21,7 @@ public class EnfantHyperactif extends EnfantSpecial{
 
     @OneToMany
     @JoinTable(name = "enfant_activites_hyperactif")
-    private ArrayList<Activite> activitesSpeciales_hyperactifs=new ArrayList<>();
+    private Collection<Activite> activitesSpeciales_hyperactifs=new ArrayList<>();
 
     public EnfantHyperactif(Enfant enfant) {
         super(enfant);
