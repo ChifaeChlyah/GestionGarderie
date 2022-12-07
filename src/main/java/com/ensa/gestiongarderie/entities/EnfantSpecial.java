@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class EnfantSpecial extends Enfant{
     @OneToOne @Nullable
     Enfant enfant;
-    Double tarifPyschologue;
+    Double tarif_pyschologue;
     public EnfantSpecial() {
     }
 
