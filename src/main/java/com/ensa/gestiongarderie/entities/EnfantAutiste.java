@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class EnfantAutiste extends EnfantSpecial{
     @Id @GeneratedValue(strategy = GenerationType.TABLE)
     long id;
-    double tarif_psychologue;
     @ManyToOne
     private AideEducateur specialiste_Autisme;
 

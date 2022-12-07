@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class EnfantSpecial extends Enfant{
     Enfant enfant;
-
+    final Double tarifPyschologue=1000.;
     public EnfantSpecial() {
     }
 
