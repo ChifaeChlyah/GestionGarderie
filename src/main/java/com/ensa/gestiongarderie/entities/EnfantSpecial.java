@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class EnfantSpecial extends Enfant{
     @OneToOne @Nullable
     Enfant enfant;
+
     @JsonIgnore @Transient
     final double tarifPyschologue=1000;
+
     public EnfantSpecial() {
     }
 
