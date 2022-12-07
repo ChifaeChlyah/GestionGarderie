@@ -59,7 +59,7 @@ public class ParentContoller {
     public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
     {
         Parent parent=parentRepository.findById(idParent).get();
-        double prix=parent.getEnfant().getNiveau().getPrix();
+        double prix=parent.getEnfant().cout();
         if(paymentStrategy.payer(prix))
             parent.setStatutPayement(true);
     }

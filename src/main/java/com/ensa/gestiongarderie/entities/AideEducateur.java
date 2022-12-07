@@ -17,6 +17,7 @@ public class AideEducateur {
     private String prenom;
     private String telephone;
     private String email;
+    private String salaire;
 
     @ManyToOne
     private Niveau niveau;

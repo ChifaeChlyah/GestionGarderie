@@ -21,11 +21,7 @@ public class ActiviteController {
     {
         return activiteRepository.findAll();
     }
-    @GetMapping(path="niveauDeActiviteById/{id}")
-    public Niveau niveauDeActivite(@PathVariable("id") Long id)
-    {
-        return activiteRepository.findById(id).get().getNiveau();
-    }
+
 
     @PostMapping()
     public boolean addActivite(@RequestBody Activite activite)
