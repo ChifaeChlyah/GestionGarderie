@@ -1,8 +1,10 @@
 package com.ensa.gestiongarderie.entities;
 
 import com.ensa.gestiongarderie.repositories.EnfantRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class EnfantSpecial extends Enfant{
     @OneToOne @Nullable
     Enfant enfant;
-    Double tarif_pyschologue;
+
+    @JsonIgnore @Transient
+    final double tarifPyschologue=1000;
+
     public EnfantSpecial() {
     }
 

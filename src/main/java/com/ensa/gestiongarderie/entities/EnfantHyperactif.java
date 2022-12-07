@@ -32,7 +32,7 @@ public class EnfantHyperactif extends EnfantSpecial{
         for (Activite activite : activitesSpeciales_hyperactifs) {
             cout+=activite.getPrix();
         }
-        cout+=tarif_pyschologue;
+        cout+=tarifPyschologue;
         return  cout;
     }
 }
