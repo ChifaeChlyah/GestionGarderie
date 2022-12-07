@@ -23,6 +23,7 @@ public class EnfantAutisteController {
 
     @PostMapping
     public void createEtuAutiste(@RequestBody EnfantAutiste enfantAutiste){
+        enfantAutiste.setEnfant(enfantAutiste);
         enfantAutisteRepository.save(enfantAutiste);
     }
 }

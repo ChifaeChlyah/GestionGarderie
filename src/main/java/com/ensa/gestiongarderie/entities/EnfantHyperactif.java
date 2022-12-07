@@ -1,5 +1,6 @@
 package com.ensa.gestiongarderie.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,7 @@ public class EnfantHyperactif extends EnfantSpecial{
         for (Activite activite : activitesSpeciales_hyperactifs) {
             cout+=activite.getPrix();
         }
-        cout+=tarif_psychologue;
+        cout+=tarifPyschologue;
         return  cout;
     }
 }

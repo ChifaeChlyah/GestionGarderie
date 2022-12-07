@@ -31,7 +31,7 @@ public class EnfantAutiste extends EnfantSpecial{
         for (Activite activite : activitesSpeciales_autisme) {
             cout+=activite.getPrix();
         }
-        cout+=tarif_psychologue;
+        cout+=tarifPyschologue;
         return  cout;
     }
 }

@@ -13,6 +13,10 @@ public abstract class EnfantSpecial extends Enfant{
     public EnfantSpecial() {
     }
 
+    public void setEnfant(Enfant enfant) {
+        this.enfant = enfant;
+    }
+
     @Autowired
     EnfantRepository enfantRepository;
     @Override
