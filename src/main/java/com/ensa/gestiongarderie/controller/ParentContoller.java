@@ -3,6 +3,8 @@ package com.ensa.gestiongarderie.controller;
 
 import com.ensa.gestiongarderie.entities.Enfant;
 import com.ensa.gestiongarderie.entities.Parent;
+import com.ensa.gestiongarderie.factory_service.EnfantFactory;
+import com.ensa.gestiongarderie.repositories.EnfantRepository;
 import com.ensa.gestiongarderie.repositories.ParentRepository;
 import com.ensa.gestiongarderie.services.PaymentStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/parent")
 public class ParentContoller {
-
+    @Autowired
+    EnfantFactory enfantFactory;
     @Autowired
     ParentRepository parentRepository;
     @GetMapping()
@@ -55,12 +58,22 @@ public class ParentContoller {
     }
 
 
-    @PostMapping(path="payer/{id}")
-    public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
+//    @PostMapping(path="payer/{id}")
+//    public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
+//    {
+//        Parent parent=parentRepository.findById(idParent).get();
+//        Enfant enfant=enfantFactory.getEnfant(parent.getEnfant());
+//        double prix=enfant.cout();
+//        if(paymentStrategy.payer(prix))
+//            parent.setStatutPayement(true);
+//    }
+@Autowired
+    EnfantRepository enfantRepository;
+    @GetMapping(path="/payer/{id}")
+    public void payer(@PathVariable("id")Long idParent)
     {
-        Parent parent=parentRepository.findById(idParent).get();
-        double prix=parent.getEnfant().cout();
-        if(paymentStrategy.payer(prix))
-            parent.setStatutPayement(true);
+        Enfant enfant=enfantRepository.findById(idParent).get();
+        enfant=enfantFactory.getEnfant(enfant);
+        System.out.println(enfant.cout());
     }
 }

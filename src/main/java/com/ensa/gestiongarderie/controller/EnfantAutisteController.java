@@ -1,6 +1,7 @@
 package com.ensa.gestiongarderie.controller;
 
 
+
 import com.ensa.gestiongarderie.entities.Activite;
 
 import com.ensa.gestiongarderie.entities.Enfant;
@@ -31,10 +32,17 @@ public class EnfantAutisteController {
     }
 
     @PostMapping
+
     public void createEtuAutiste(@RequestBody Enfant enfantAutiste){
         enfantRepository.save(enfantAutiste);
     }
 
+
+
+    public void createEtuAutiste(@RequestBody EnfantAutiste enfantAutiste){
+        enfantAutiste.setEnfant((Enfant) enfantAutiste);
+        enfantAutisteRepository.save(enfantAutiste);
+    }
 
 
     @PutMapping ("/{id}/addActivite")
@@ -58,7 +66,6 @@ public void addActiviteToEnfant(@RequestBody Activite activite, @PathVariable(na
     public void delete(@PathVariable("id") long id){
         enfantRepository.deleteById(id);
     }
-
 
 }
 
