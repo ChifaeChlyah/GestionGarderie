@@ -1,9 +1,6 @@
 package com.ensa.gestiongarderie.controller;
 
-<<<<<<< HEAD
-=======
 import com.ensa.gestiongarderie.entities.Activite;
->>>>>>> e8f0fa87f3775430134f8e2afc5b93ef5e19af05
 import com.ensa.gestiongarderie.entities.Enfant;
 import com.ensa.gestiongarderie.entities.EnfantAutiste;
 import com.ensa.gestiongarderie.repositories.EnfantAutisteRepository;
@@ -23,11 +20,6 @@ public class EnfantAutisteController {
 
     @Autowired
     EnfantRepository enfantRepository;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> e8f0fa87f3775430134f8e2afc5b93ef5e19af05
 
     @GetMapping()
     public List<EnfantAutiste> getAll(){
@@ -35,12 +27,6 @@ public class EnfantAutisteController {
     }
 
     @PostMapping
-<<<<<<< HEAD
-    public void createEtuAutiste(@RequestBody Enfant enfantAutiste){
-        enfantRepository.save(enfantAutiste);
-    }
-
-=======
     public void createEtuAutiste(@RequestBody EnfantAutiste enfantAutiste){
         enfantAutiste.setEnfant((Enfant) enfantAutiste);
         enfantAutisteRepository.save(enfantAutiste);
@@ -68,7 +54,5 @@ public void addActiviteToEnfant(@RequestBody Activite activite, @PathVariable(na
         enfantRepository.deleteById(id);
     }
 
-
->>>>>>> e8f0fa87f3775430134f8e2afc5b93ef5e19af05
 }
 

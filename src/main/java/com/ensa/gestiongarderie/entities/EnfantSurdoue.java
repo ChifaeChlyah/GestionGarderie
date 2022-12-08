@@ -1,10 +1,11 @@
 package com.ensa.gestiongarderie.entities;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
+import java.lang.annotation.Inherited;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 public class EnfantSurdoue extends EnfantSpecial{
     @Id @GeneratedValue(strategy = GenerationType.TABLE)
     long id;
-    double quotientIntellectuel;
+    double quotientIntellectuel=150.;
 
     @OneToMany
     @JoinTable(name = "enfant_activites_surdoué")
