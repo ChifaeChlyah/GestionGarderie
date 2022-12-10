@@ -13,7 +13,7 @@ import java.util.Collection;
 @NoArgsConstructor
 //@AllArgsConstructor
 public class EnfantHyperactif extends EnfantSpecial{
-    @Id @GeneratedValue(strategy = GenerationType.TABLE)
+    @Id
     long id;
     @ManyToOne
 
@@ -28,11 +28,14 @@ public class EnfantHyperactif extends EnfantSpecial{
     }
     @Override
     public Double cout() {
-        double cout=super.cout();
+        double cout=0;
         for (Activite activite : activitesSpeciales_hyperactifs) {
             cout+=activite.getPrix();
         }
+
         cout+=tarifPyschologue;
+        if(getEnfant()!=null)
+            cout+=getEnfant().cout() ;
         return  cout;
     }
 }

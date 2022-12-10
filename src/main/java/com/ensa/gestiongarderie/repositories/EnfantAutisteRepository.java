@@ -12,4 +12,7 @@ public interface EnfantAutisteRepository extends JpaRepository<EnfantAutiste,Lon
     @Transactional
     @Modifying
     void save_autist_by_id(long id);
+
+    @Query(value = "SELECT count(*) FROM enfant_autiste where id=?1",nativeQuery = true)
+    int existsById(long id);
 }

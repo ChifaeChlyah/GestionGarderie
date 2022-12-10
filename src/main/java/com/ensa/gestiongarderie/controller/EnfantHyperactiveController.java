@@ -30,11 +30,7 @@ public class EnfantHyperactiveController {
         return enfantHyperactifRepository.findAll();
     }
 
-    @PostMapping
-    public void createEtuAutiste(@RequestBody EnfantHyperactif enfantAutiste){
-        enfantAutiste.setEnfant((Enfant) enfantAutiste);
-        enfantHyperactifRepository.save(enfantAutiste);
-    }
+
 
     @PutMapping ("/{id}/addActivite")
     public void addActiviteToEnfant(@RequestBody Activite activite, @PathVariable(name = "id") long id){
@@ -46,7 +42,7 @@ public class EnfantHyperactiveController {
 
     @PutMapping ("/{id}/allActivite")
     public Collection<Activite> allActiviteEnfant(@RequestBody Activite activite, @PathVariable(name = "id") long id){
-        Collection<Activite> activites = enfantHyperactifRepository.findById(id).get().getNiveau().getActivites();
+        Collection<Activite> activites = enfantRepository.findById(id).get().getNiveau().getActivites();
         for (Activite activite1 :  enfantHyperactifRepository.findById(id).get().getActivitesSpeciales_hyperactifs()) {
             activites.add(activite1);
         }

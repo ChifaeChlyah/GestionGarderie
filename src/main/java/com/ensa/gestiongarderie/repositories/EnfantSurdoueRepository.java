@@ -11,4 +11,7 @@ public interface EnfantSurdoueRepository extends JpaRepository<EnfantSurdoue,Lon
     @Transactional
     @Modifying
     void save_surdoue_by_id(long id);
+
+    @Query(value = "SELECT count(*) FROM enfant_surdoue where id=?1",nativeQuery = true)
+    int existsById(long id);
 }

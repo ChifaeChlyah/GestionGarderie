@@ -15,7 +15,7 @@ import java.util.Collections;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnfantAutiste extends EnfantSpecial{
-    @Id @GeneratedValue(strategy = GenerationType.TABLE)
+    @Id
     long id;
     @ManyToOne
     private AideEducateur specialiste_Autisme;
@@ -30,11 +30,14 @@ public class EnfantAutiste extends EnfantSpecial{
 
     @Override
     public Double cout() {
-        double cout=super.cout();
+        double cout=0;
         for (Activite activite : activitesSpeciales_autisme) {
             cout+=activite.getPrix();
         }
         cout+=tarifPyschologue;
+
+        if(getEnfant()!=null)
+            cout+=getEnfant().cout();
         return  cout;
     }
 }

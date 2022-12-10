@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-public abstract class EnfantSpecial extends Enfant{
-    @OneToOne @Nullable
-    Enfant enfant;
+public abstract class EnfantSpecial implements IEnfant{
+    long id;
+    IEnfant enfant;
 
     @JsonIgnore @Transient
     final double tarifPyschologue=1000;
@@ -21,53 +21,39 @@ public abstract class EnfantSpecial extends Enfant{
     public EnfantSpecial() {
     }
 
-    public void setEnfant(Enfant enfant) {
+
+    public void setEnfant(IEnfant enfant) {
         this.enfant = enfant;
     }
 
     @Autowired
     EnfantRepository enfantRepository;
-    @Override
-    public Double cout(){
-        return enfant.cout();
-    }
+
     public EnfantSpecial(Enfant enfant) {
-        super(enfant.getId(), enfant.getNom(), enfant.getPrenom(), enfant.getAge(),enfant.getNiveau(),enfant.getParent());
         this.enfant=enfant;
     }
-    
-    @Override
-    public void setNom(String nom) {
-        super.setNom(nom);
-        if(enfant!=null)
-            enfant.setNom(nom);
-    } 
-    @Override
-    public void setPrenom(String prenom) {
-        super.setPrenom(prenom);
-        if(enfant!=null)
-            enfant.setPrenom(prenom);
+
+
+    public EnfantHyperactif convertToHyperactif()
+    {
+        EnfantHyperactif enfantHyperactif=new EnfantHyperactif();
+        enfantHyperactif.setId(id);
+        return  enfantHyperactif;
     }
-    @Override
-    public void setAge(int age) {
-        super.setAge(age);
-        if(enfant!=null)
-            enfant.setAge(age);
+    public EnfantAutiste convertToAutiste()
+    {
+        EnfantAutiste enfantAutiste=new EnfantAutiste();
+        enfantAutiste.setId(id);
+        return  enfantAutiste;
     }
-    @Override
-    public void setNiveau(Niveau niveau) {
-        super.setNiveau(niveau);
-        if(enfant!=null)
-            enfant.setNiveau(niveau);
-    }
-    @Override
-    public void setParent(Parent parent) {
-        super.setParent(parent);
-        if(enfant!=null)
-            enfant.setParent(parent);
+    public EnfantSurdoue convertToSurdoue()
+    {
+        EnfantSurdoue enfantSurdoue=new EnfantSurdoue();
+        enfantSurdoue.setId(id);
+        return  enfantSurdoue;
     }
 
-    public Enfant getEnfant()
+    public IEnfant getEnfant()
     {
         return enfant;
     }

@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 //@AllArgsConstructor
 public class EnfantSurdoue extends EnfantSpecial{
-    @Id @GeneratedValue(strategy = GenerationType.TABLE)
+    @Id
     long id;
     double quotientIntellectuel=150.;
 
@@ -28,10 +28,13 @@ public class EnfantSurdoue extends EnfantSpecial{
     }
     @Override
     public Double cout() {
-        double cout=super.cout();
+        double cout=0;
         for (Activite activite : activiteAdditionelles) {
             cout+=activite.getPrix();
         }
+        cout+=tarifPyschologue;
+        if(getEnfant()!=null)
+            cout+= getEnfant().cout() ;
         return  cout;
     }
 }

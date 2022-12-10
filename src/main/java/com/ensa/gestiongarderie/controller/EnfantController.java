@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin("*")
 @RequestMapping(path="/enfant")
 @RestController
 public class EnfantController {
@@ -48,47 +48,52 @@ public class EnfantController {
     @PostMapping("/{type}")
     public boolean addEnfant(@RequestBody Enfant enf,@PathVariable(name = "type") TypeEnfant type )
     {
-        Enfant enfant=enfantFactory.getEnfant(enf);
+//        Enfant enfant=enfantFactory.getEnfant(enf,type);
         switch (type)
         {
 
             case ENFANT_AUTISTE:
             {
-                enfantAutisteRepository.save((EnfantAutiste) enfant);
+                enfantRepository.save(enf);
+                enfantAutisteRepository.save(enf.convertToAutiste());
                 break;
             }
             case ENFANT_SURDOUE:
             {
-                enfantSurdoueRepository.save((EnfantSurdoue) enfant);
+                enfantRepository.save(enf);
+                enfantSurdoueRepository.save(enf.convertToSurdoue());
                 break;
             }
             case ENFANT_HYPERACTIF:
             {
-                enfantHyperactifRepository.save((EnfantHyperactif) enfant);
+                enfantRepository.save(enf);
+                enfantHyperactifRepository.save(enf.convertToHyperactif());
                 break;
             }
             case ENFANT_AUTISTE_ET_HYPERACTIF:
             {
-                Enfant enfant1=enfantRepository.save(enfant);
+                Enfant enfant1=enfantRepository.save(enf);
                 if(!enfantHyperactifRepository.findById(enfant1.getId()).isPresent())
-                    enfantRepository.save_hyperactif_by_id(enfant1.getId());
+                    enfantHyperactifRepository.save(enfant1.convertToHyperactif());
+                if(!enfantAutisteRepository.findById(enfant1.getId()).isPresent())
+                    enfantAutisteRepository.save(enfant1.convertToAutiste());
                 break;
             }
             case ENFANT_HYPERACTIF_ET_SURDOUE:
             case ENFANT_AUTISTE_ET_SURDOUE: {
-                Enfant enfant1=enfantRepository.save(enfant);
+                Enfant enfant1=enfantRepository.save(enf);
                 enfantRepository.save_surdoue_by_id(enfant1.getId());
                 break;
             }
             case ENFANT_AUTIST_ET_HYPERACTIF_ET_SURDOUE:
             {
-                Enfant enfant1=enfantRepository.save(enfant);
+                Enfant enfant1=enfantRepository.save(enf);
                 enfantRepository.save_hyperactif_by_id(enfant1.getId());
                 enfantRepository.save_surdoue_by_id(enfant1.getId());
                 break;
             }
             default: {
-                enfantRepository.save(enfant);
+                enfantRepository.save(enf);
             }
         }
         return true;

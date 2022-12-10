@@ -2,6 +2,7 @@ package com.ensa.gestiongarderie.controller;
 
 
 import com.ensa.gestiongarderie.entities.Enfant;
+import com.ensa.gestiongarderie.entities.IEnfant;
 import com.ensa.gestiongarderie.entities.Parent;
 import com.ensa.gestiongarderie.factory_service.EnfantFactory;
 import com.ensa.gestiongarderie.repositories.EnfantRepository;
@@ -58,22 +59,22 @@ public class ParentContoller {
     }
 
 
-//    @PostMapping(path="payer/{id}")
-//    public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
-//    {
-//        Parent parent=parentRepository.findById(idParent).get();
-//        Enfant enfant=enfantFactory.getEnfant(parent.getEnfant());
-//        double prix=enfant.cout();
-//        if(paymentStrategy.payer(prix))
-//            parent.setStatutPayement(true);
-//    }
-@Autowired
-    EnfantRepository enfantRepository;
-    @GetMapping(path="/payer/{id}")
-    public void payer(@PathVariable("id")Long idParent)
+    @PostMapping(path="payer/{id}")
+    public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
     {
-        Enfant enfant=enfantRepository.findById(idParent).get();
-        enfant=enfantFactory.getEnfant(enfant);
-        System.out.println(enfant.cout());
+        Parent parent=parentRepository.findById(idParent).get();
+        IEnfant enfant=enfantFactory.getEnfant(parent.getEnfant());
+        double prix=enfant.cout();
+        if(paymentStrategy.payer(prix))
+            parent.setStatutPayement(true);
     }
+//@Autowired
+//    EnfantRepository enfantRepository;
+//    @GetMapping(path="/payer/{id}")
+//    public void payer(@PathVariable("id")Long idParent)
+//    {
+//        IEnfant enfant=enfantRepository.findById(idParent).get();
+//        enfant=enfantFactory.getEnfant((Enfant) enfant);
+//        System.out.println(enfant.cout());
+//    }
 }

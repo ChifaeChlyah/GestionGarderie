@@ -1,9 +1,6 @@
 package com.ensa.gestiongarderie.factory_service;
 
-import com.ensa.gestiongarderie.entities.Enfant;
-import com.ensa.gestiongarderie.entities.EnfantAutiste;
-import com.ensa.gestiongarderie.entities.EnfantHyperactif;
-import com.ensa.gestiongarderie.entities.EnfantSurdoue;
+import com.ensa.gestiongarderie.entities.*;
 import com.ensa.gestiongarderie.enums.TypeEnfant;
 import com.ensa.gestiongarderie.repositories.EnfantAutisteRepository;
 import com.ensa.gestiongarderie.repositories.EnfantHyperactifRepository;
@@ -17,49 +14,49 @@ import java.lang.reflect.Type;
 @Service
 public class EnfantFactory {
     
-    public Enfant getEnfant(Enfant enfant, TypeEnfant typeEnfant)
-    {
-        switch (typeEnfant)
-        {
-
-            case ENFANT_AUTISTE:
-            {
-                return new EnfantAutiste(enfant);
-            }
-            case ENFANT_SURDOUE:
-            {
-                return new EnfantSurdoue(enfant);
-            }
-            case ENFANT_HYPERACTIF:
-            {
-                return new EnfantHyperactif(enfant);
-            }
-            case ENFANT_AUTISTE_ET_HYPERACTIF:
-            {
-                EnfantHyperactif enfantHyperactif=new EnfantHyperactif(enfant);
-                return new EnfantAutiste(enfantHyperactif);
-            }
-            case ENFANT_HYPERACTIF_ET_SURDOUE:
-            {
-                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
-                return new EnfantHyperactif(enfantSurdoue);
-            }
-            case ENFANT_AUTISTE_ET_SURDOUE:
-            {
-                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
-                return new EnfantAutiste(enfantSurdoue);
-            }
-            case ENFANT_AUTIST_ET_HYPERACTIF_ET_SURDOUE:
-            {
-                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
-                EnfantHyperactif enfantHyperactif=new EnfantHyperactif(enfantSurdoue);
-                return new EnfantAutiste(enfantHyperactif);
-            }
-            default: {
-                return enfant;
-            }
-        }
-    }
+//    public Enfant getEnfant(Enfant enfant, TypeEnfant typeEnfant)
+//    {
+//        switch (typeEnfant)
+//        {
+//
+//            case ENFANT_AUTISTE:
+//            {
+//                return new EnfantAutiste(enfant);
+//            }
+//            case ENFANT_SURDOUE:
+//            {
+//                return new EnfantSurdoue(enfant);
+//            }
+//            case ENFANT_HYPERACTIF:
+//            {
+//                return new EnfantHyperactif(enfant);
+//            }
+//            case ENFANT_AUTISTE_ET_HYPERACTIF:
+//            {
+//                EnfantHyperactif enfantHyperactif=new EnfantHyperactif(enfant);
+//                return new EnfantAutiste(enfantHyperactif);
+//            }
+//            case ENFANT_HYPERACTIF_ET_SURDOUE:
+//            {
+//                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
+//                return new EnfantHyperactif(enfantSurdoue);
+//            }
+//            case ENFANT_AUTISTE_ET_SURDOUE:
+//            {
+//                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
+//                return new EnfantAutiste(enfantSurdoue);
+//            }
+//            case ENFANT_AUTIST_ET_HYPERACTIF_ET_SURDOUE:
+//            {
+//                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
+//                EnfantHyperactif enfantHyperactif=new EnfantHyperactif(enfantSurdoue);
+//                return new EnfantAutiste(enfantHyperactif);
+//            }
+//            default: {
+//                return enfant;
+//            }
+//        }
+//    }
     
     @Autowired
     EnfantRepository enfantRepository;
@@ -73,16 +70,15 @@ public class EnfantFactory {
     {
 
         long id=enfant.getId();
-        System.out.println(enfantSurdoueRepository.findById(id).isPresent());
         if(enfantAutisteRepository.findById(id).isPresent()
                 &&enfantHyperactifRepository.findById(id).isPresent()
                 &&enfantSurdoueRepository.findById(id).isPresent())
             return TypeEnfant.ENFANT_AUTIST_ET_HYPERACTIF_ET_SURDOUE;
         else if (enfantAutisteRepository.findById(id).isPresent()
-                &&enfantHyperactifRepository.findById(id).isPresent()) 
+                &&enfantHyperactifRepository.findById(id).isPresent())
             return TypeEnfant.ENFANT_AUTISTE_ET_HYPERACTIF;
         else if (enfantHyperactifRepository.findById(id).isPresent()
-                &&enfantSurdoueRepository.findById(id).isPresent()) 
+                &&enfantSurdoueRepository.findById(id).isPresent())
             return TypeEnfant.ENFANT_HYPERACTIF_ET_SURDOUE;
         else if (enfantAutisteRepository.findById(id).isPresent()
                 &&enfantSurdoueRepository.findById(id).isPresent())
@@ -91,7 +87,7 @@ public class EnfantFactory {
             return TypeEnfant.ENFANT_NORMAL;
 
     }
-    public Enfant getEnfant(Enfant enfant)
+    public IEnfant getEnfant(Enfant enfant)
     {
         TypeEnfant typeEnfant=getTypeEnfant(enfant);
         switch (typeEnfant)

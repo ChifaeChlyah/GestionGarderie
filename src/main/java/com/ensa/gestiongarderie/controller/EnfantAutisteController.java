@@ -26,11 +26,7 @@ public class EnfantAutisteController {
         return enfantAutisteRepository.findAll();
     }
 
-    @PostMapping
-    public void createEtuAutiste(@RequestBody EnfantAutiste enfantAutiste){
-        enfantAutiste.setEnfant((Enfant) enfantAutiste);
-        enfantAutisteRepository.save(enfantAutiste);
-    }
+
 
     @PutMapping ("/{id}/addActivite")
 public void addActiviteToEnfant(@RequestBody Activite activite, @PathVariable(name = "id") long id){
@@ -42,7 +38,7 @@ public void addActiviteToEnfant(@RequestBody Activite activite, @PathVariable(na
 
     @PutMapping ("/{id}/allActivite")
     public Collection<Activite> allActiviteEnfant(@RequestBody Activite activite, @PathVariable(name = "id") long id){
-        Collection<Activite> activites = enfantAutisteRepository.findById(id).get().getNiveau().getActivites();
+        Collection<Activite> activites = enfantRepository.findById(id).get().getNiveau().getActivites();
         for (Activite activite1 :  enfantAutisteRepository.findById(id).get().getActivitesSpeciales_autisme()) {
             activites.add(activite1);
         }
