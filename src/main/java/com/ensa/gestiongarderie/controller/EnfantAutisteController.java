@@ -31,22 +31,6 @@ public class EnfantAutisteController {
         return enfantAutisteRepository.findAll();
     }
 
-<<<<<<< HEAD
-
-=======
-    @PostMapping
-
-    public void createEtuAutiste(@RequestBody Enfant enfantAutiste){
-        enfantRepository.save(enfantAutiste);
-    }
-
-
-
-    public void createEtuAutiste(@RequestBody EnfantAutiste enfantAutiste){
-        enfantAutiste.setEnfant((Enfant) enfantAutiste);
-        enfantAutisteRepository.save(enfantAutiste);
-    }
->>>>>>> 707f7355531b5373e1ceceabda20f9b63222aeb7
 
 
     @PutMapping ("/{id}/addActivite")
