@@ -1,6 +1,9 @@
 package com.ensa.gestiongarderie.controller;
 
+
+
 import com.ensa.gestiongarderie.entities.Activite;
+
 import com.ensa.gestiongarderie.entities.Enfant;
 import com.ensa.gestiongarderie.entities.EnfantAutiste;
 import com.ensa.gestiongarderie.repositories.EnfantAutisteRepository;
@@ -13,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/enfantAutiste")
+@CrossOrigin("*")
 public class EnfantAutisteController {
 
     @Autowired
@@ -21,11 +25,28 @@ public class EnfantAutisteController {
     @Autowired
     EnfantRepository enfantRepository;
 
+
     @GetMapping()
     public List<EnfantAutiste> getAll(){
         return enfantAutisteRepository.findAll();
     }
 
+<<<<<<< HEAD
+
+=======
+    @PostMapping
+
+    public void createEtuAutiste(@RequestBody Enfant enfantAutiste){
+        enfantRepository.save(enfantAutiste);
+    }
+
+
+
+    public void createEtuAutiste(@RequestBody EnfantAutiste enfantAutiste){
+        enfantAutiste.setEnfant((Enfant) enfantAutiste);
+        enfantAutisteRepository.save(enfantAutiste);
+    }
+>>>>>>> 707f7355531b5373e1ceceabda20f9b63222aeb7
 
 
     @PutMapping ("/{id}/addActivite")
