@@ -21,7 +21,7 @@ public class AdministrateurController {
         return true;
     }
 
-    @GetMapping
+    @PostMapping
     public boolean verifierCompte(String email,String password){
         Administrateur a=administrateurRepository.findByEmail(email);
         if(a!=null){

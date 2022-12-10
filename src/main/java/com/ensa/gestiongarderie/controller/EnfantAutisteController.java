@@ -32,18 +32,6 @@ public class EnfantAutisteController {
     }
 
 
-    @PostMapping
-
-    public void createEtuAutiste(@RequestBody Enfant enfantAutiste){
-        enfantRepository.save(enfantAutiste);
-    }
-
-
-
-    public void createEtuAutiste(@RequestBody EnfantAutiste enfantAutiste){
-        enfantAutiste.setEnfant((Enfant) enfantAutiste);
-        enfantAutisteRepository.save(enfantAutiste);
-    }
 
 
 
