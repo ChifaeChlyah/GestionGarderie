@@ -8,6 +8,7 @@ import com.ensa.gestiongarderie.entities.Parent;
 import com.ensa.gestiongarderie.factory_service.EnfantFactory;
 import com.ensa.gestiongarderie.mapping.Connection;
 import com.ensa.gestiongarderie.repositories.EnfantRepository;
+import com.ensa.gestiongarderie.repositories.NiveauRepository;
 import com.ensa.gestiongarderie.repositories.ParentRepository;
 import com.ensa.gestiongarderie.services.PaymentStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import java.util.List;
 public class ParentContoller {
     @Autowired
     EnfantFactory enfantFactory;
+    @Autowired
+    NiveauRepository niveauRepository;
     @Autowired
     ParentRepository parentRepository;
     @GetMapping()
@@ -46,6 +49,13 @@ public class ParentContoller {
     {
         if(parentRepository.findById(parent.getId()).isPresent())
             return false;
+        Enfant enfant=parent.getEnfant();
+        if(enfant.getAge()<4)
+            enfant.setNiveau(niveauRepository.findByNom("Niveau 1"));
+        else if(enfant.getAge()>4&&enfant.getAge()<9)
+            enfant.setNiveau(niveauRepository.findByNom("Niveau 2"));
+        else
+            enfant.setNiveau(niveauRepository.findByNom("Niveau 3"));
         parentRepository.save(parent);
         return true;
     }

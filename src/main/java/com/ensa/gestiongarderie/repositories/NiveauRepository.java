@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface NiveauRepository extends JpaRepository<Niveau,Long> {
+    Niveau findByNom(String nom);
 }

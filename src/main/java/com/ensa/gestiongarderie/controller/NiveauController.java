@@ -9,7 +9,10 @@ import com.ensa.gestiongarderie.repositories.ParentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/niveau")
@@ -30,6 +33,7 @@ public class NiveauController {
         niveauRepository.save(niveau);
         return true;
     }
+
     @GetMapping(path="enfantsByNiveauId/{id}")
     public List<Enfant> enfantsParNiveau(@PathVariable("id")Long idNiveau)
     {
@@ -37,7 +41,7 @@ public class NiveauController {
     }
 
     @GetMapping(path="activitesByNiveauId/{id}")
-    public List<Activite> activitesParNiveau(@PathVariable("id")Long idNiveau)
+    public Collection<Activite> activitesParNiveau(@PathVariable("id")Long idNiveau)
     {
         return niveauRepository.findById(idNiveau).get().getActivites();
     }
