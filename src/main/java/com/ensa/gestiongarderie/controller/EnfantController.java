@@ -1,5 +1,6 @@
 package com.ensa.gestiongarderie.controller;
 
+import com.ensa.gestiongarderie.angularClasses.Enfant_type;
 import com.ensa.gestiongarderie.entities.*;
 import com.ensa.gestiongarderie.enums.TypeEnfant;
 import com.ensa.gestiongarderie.factory_service.EnfantFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin("*")
 @RequestMapping(path="/enfant")
@@ -25,10 +27,20 @@ public class EnfantController {
 
     @Autowired
     EnfantFactory enfantFactory;
+    @Autowired
+    NiveauRepository niveauRepository;
     @GetMapping()
-    public List<Enfant> allEnfant()
+    public List<Enfant_type> allEnfant()
     {
-        return enfantRepository.findAll();
+        List<Enfant> enfants=  enfantRepository.findAll();
+        List<Enfant_type> enfants_Type=  new ArrayList<>();
+        for (Enfant enfant : enfants) {
+            Enfant_type enfant_type=new Enfant_type();
+            enfant_type.enfantToEnfant_type(enfant);
+            enfant_type.setType(enfantFactory.getTypeEnfant(enfant).toString());
+            enfants_Type.add(enfant_type);
+        }
+        return enfants_Type;
     }
 
 
@@ -49,6 +61,12 @@ public class EnfantController {
     public boolean addEnfant(@RequestBody Enfant enf,@PathVariable(name = "type") TypeEnfant type )
     {
 //        Enfant enfant=enfantFactory.getEnfant(enf,type);
+        if(enf.getAge()<=4)
+            enf.setNiveau(niveauRepository.findByNom("Niveau 1"));
+        else if(enf.getAge()>4&&enf.getAge()<=8)
+            enf.setNiveau(niveauRepository.findByNom("Niveau 2"));
+        else
+            enf.setNiveau(niveauRepository.findByNom("Niveau 3"));
         switch (type)
         {
 

@@ -83,6 +83,12 @@ public class EnfantFactory {
         else if (enfantAutisteRepository.findById(id).isPresent()
                 &&enfantSurdoueRepository.findById(id).isPresent())
             return TypeEnfant.ENFANT_AUTISTE_ET_SURDOUE;
+        else if (enfantAutisteRepository.findById(id).isPresent())
+            return TypeEnfant.ENFANT_AUTISTE;
+        else if (enfantHyperactifRepository.findById(id).isPresent())
+            return TypeEnfant.ENFANT_HYPERACTIF;
+        else if (enfantSurdoueRepository.findById(id).isPresent())
+            return TypeEnfant.ENFANT_SURDOUE;
         else
             return TypeEnfant.ENFANT_NORMAL;
 
