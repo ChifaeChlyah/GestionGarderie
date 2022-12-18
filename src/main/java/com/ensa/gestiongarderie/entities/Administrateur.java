@@ -20,4 +20,11 @@ public class Administrateur {
     private String prenom;
     private String email;
     private String motDePasse;
+
+    public Administrateur(String nom, String prenom, String email, String motDePasse) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.motDePasse = motDePasse;
+    }
 }

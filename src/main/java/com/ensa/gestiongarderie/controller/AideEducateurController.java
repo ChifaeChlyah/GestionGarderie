@@ -31,4 +31,8 @@ public class AideEducateurController {
         aideEducateurRepository.save(ad);
         return true;
     }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable(name = "id") long id){
+        aideEducateurRepository.deleteById(id);
+    }
 }

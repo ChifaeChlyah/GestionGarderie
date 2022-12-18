@@ -1,10 +1,12 @@
 package com.ensa.gestiongarderie.controller;
 
 
+import com.ensa.gestiongarderie.entities.Administrateur;
 import com.ensa.gestiongarderie.entities.Enfant;
 import com.ensa.gestiongarderie.entities.IEnfant;
 import com.ensa.gestiongarderie.entities.Parent;
 import com.ensa.gestiongarderie.factory_service.EnfantFactory;
+import com.ensa.gestiongarderie.mapping.Connection;
 import com.ensa.gestiongarderie.repositories.EnfantRepository;
 import com.ensa.gestiongarderie.repositories.ParentRepository;
 import com.ensa.gestiongarderie.services.PaymentStrategy;
@@ -67,6 +69,16 @@ public class ParentContoller {
         double prix=enfant.cout();
         if(paymentStrategy.payer(prix))
             parent.setStatutPayement(true);
+    }
+    @PostMapping("/connection")
+    public boolean verifierCompte(@RequestBody Connection connection){
+        Parent a=parentRepository.findByEmail(connection.getEmail());
+        if(a!=null){
+            if(a.getMotDePasse().equals(connection.getPassword())){
+                return  true;
+            }
+        }
+        return  false ;
     }
 //@Autowired
 //    EnfantRepository enfantRepository;
