@@ -1,11 +1,14 @@
 package com.ensa.gestiongarderie.controller;
 
 
+import com.ensa.gestiongarderie.angularClasses.DonnessPayment;
+import com.ensa.gestiongarderie.angularClasses.Enfant_type;
 import com.ensa.gestiongarderie.entities.Administrateur;
 import com.ensa.gestiongarderie.entities.Enfant;
 import com.ensa.gestiongarderie.entities.IEnfant;
 import com.ensa.gestiongarderie.entities.Parent;
 import com.ensa.gestiongarderie.factory_service.EnfantFactory;
+import com.ensa.gestiongarderie.factory_service.PayementStrategyFactory;
 import com.ensa.gestiongarderie.mapping.Connection;
 import com.ensa.gestiongarderie.repositories.EnfantRepository;
 import com.ensa.gestiongarderie.repositories.NiveauRepository;
@@ -28,15 +31,30 @@ public class ParentContoller {
     NiveauRepository niveauRepository;
     @Autowired
     ParentRepository parentRepository;
+    @Autowired
+    EnfantRepository enfantRepository;
+    @Autowired
+    PayementStrategyFactory payementStrategyFactory;
+
     @GetMapping()
     public List<Parent> tousLesParents()
     {
         return parentRepository.findAll();
     }
     @GetMapping(path="/enfantByParentId/{id}")
-    public Enfant enfant(@PathVariable("id") Long idParent)
+    public Enfant_type enfant(@PathVariable("id") Long idParent)
     {
-        return parentRepository.findById(idParent).get().getEnfant();
+        Enfant enfant=null;
+        for (Enfant e : enfantRepository.findAll()) {
+            if(e!=null&&e.getParent()!=null&&e.getParent().getId()==idParent)
+                enfant=e;
+        }
+        if (enfant==null)
+            return null;
+        Enfant_type enfant_type=new Enfant_type();
+        enfant_type.enfantToEnfant_type(enfant);
+        enfant_type.setType(enfantFactory.getTypeEnfant(enfant).toString());
+        return enfant_type;
     }
     @GetMapping(path="/{id}")
     public Parent getparent(@PathVariable("id")Long idParent)
@@ -71,32 +89,28 @@ public class ParentContoller {
     }
 
 
-    @PostMapping(path="payer/{id}")
-    public void payer(@PathVariable("id")Long idParent, PaymentStrategy paymentStrategy)
+    @PostMapping(path="payer/{id}/{payementStrategy}")
+    public void payer(@PathVariable("id")Long idParent,@PathVariable("payementStrategy") String strategy,@RequestBody DonnessPayment donnessPayment)
     {
+        PaymentStrategy paymentStrategy=payementStrategyFactory.getStrategy(strategy,donnessPayment);
+
         Parent parent=parentRepository.findById(idParent).get();
         IEnfant enfant=enfantFactory.getEnfant(parent.getEnfant());
         double prix=enfant.cout();
-        if(paymentStrategy.payer(prix))
+        if(paymentStrategy.payer(prix)) {
             parent.setStatutPayement(true);
+            parentRepository.save(parent);
+        }
     }
     @PostMapping("/connection")
-    public boolean verifierCompte(@RequestBody Connection connection){
+    public Long verifierCompte(@RequestBody Connection connection){
         Parent a=parentRepository.findByEmail(connection.getEmail());
         if(a!=null){
             if(a.getMotDePasse().equals(connection.getPassword())){
-                return  true;
+                return  a.getId();
             }
         }
-        return  false ;
+        return  null ;
     }
-//@Autowired
-//    EnfantRepository enfantRepository;
-//    @GetMapping(path="/payer/{id}")
-//    public void payer(@PathVariable("id")Long idParent)
-//    {
-//        IEnfant enfant=enfantRepository.findById(idParent).get();
-//        enfant=enfantFactory.getEnfant((Enfant) enfant);
-//        System.out.println(enfant.cout());
-//    }
+
 }

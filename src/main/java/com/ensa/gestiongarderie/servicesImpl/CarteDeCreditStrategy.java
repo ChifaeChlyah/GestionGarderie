@@ -7,16 +7,56 @@ import com.ensa.gestiongarderie.services.PaymentStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class CarteDeCreditStrategy implements PaymentStrategy {
+    HashMap<String,String> comptes_paypal=new HashMap<>();
+    public CarteDeCreditStrategy()
+    {
+        comptes_paypal.put("compte1","pass1");
+        comptes_paypal.put("compte2","pass2");
+        comptes_paypal.put("compte3","pass3");
+    }
     private String numeroCarte;
     private String cryptogramme;
     private Date DateExpiration;
+
+    public String getNumeroCarte() {
+        return numeroCarte;
+    }
+
+    public void setNumeroCarte(String numeroCarte) {
+        this.numeroCarte = numeroCarte;
+    }
+
+    public String getCryptogramme() {
+        return cryptogramme;
+    }
+
+    public void setCryptogramme(String cryptogramme) {
+        this.cryptogramme = cryptogramme;
+    }
+
+    public Date getDateExpiration() {
+        return DateExpiration;
+    }
+
+    public void setDateExpiration(Date dateExpiration) {
+        DateExpiration = dateExpiration;
+    }
+
+    public CarteDeCreditRepository getCarteDeCreditRepository() {
+        return carteDeCreditRepository;
+    }
+
+    public void setCarteDeCreditRepository(CarteDeCreditRepository carteDeCreditRepository) {
+        this.carteDeCreditRepository = carteDeCreditRepository;
+    }
+
     @Autowired
     CarteDeCreditRepository carteDeCreditRepository;
 
-    public CarteDeCreditStrategy() {
-    }
+
 
     public CarteDeCreditStrategy(String numeroCarte, String cryptogramme, Date dateExpiration) {
         this.numeroCarte = numeroCarte;
@@ -26,15 +66,12 @@ public class CarteDeCreditStrategy implements PaymentStrategy {
 
     @Override
     public boolean payer(double prix) {
-        CarteDeCredit carteDeCredit=carteDeCreditRepository.findByNumeroCarte(numeroCarte);
-        if(carteDeCredit==null)
+        String cryptogramme=comptes_paypal.get(this.cryptogramme);
+        if(cryptogramme==null)
             return false;
-        if(carteDeCredit.getCryptogramme()!=cryptogramme)
+        if(!cryptogramme.equals(this.cryptogramme))
             return false;
-        if(carteDeCredit.getSolde()<prix)
-            return false;
-        carteDeCredit.setSolde(carteDeCredit.getSolde()-prix);
-        carteDeCreditRepository.save(carteDeCredit);
         return true;
     }
+
 }
