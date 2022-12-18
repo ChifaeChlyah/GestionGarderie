@@ -1,6 +1,7 @@
 package com.ensa.gestiongarderie.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,6 @@ public class Parent {
     private boolean statutPayement=false;
 
     @OneToOne(mappedBy = "parent",cascade=CascadeType.ALL)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     Enfant enfant;
 }

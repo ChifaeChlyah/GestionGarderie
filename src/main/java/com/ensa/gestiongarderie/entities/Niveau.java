@@ -37,6 +37,7 @@ public class Niveau {
     private List<AideEducateur> aideEducateurs=new ArrayList<>();
 
     @OneToMany(mappedBy = "niveau")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Enfant> enfants=new ArrayList<>();
 
 }
