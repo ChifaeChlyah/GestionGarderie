@@ -22,9 +22,11 @@ public class AdministrateurController {
         return true;
     }
 
+
     @PostMapping("/connection")
     public boolean verifierCompte(@RequestBody Connection connection){
         Administrateur a=administrateurRepository.findByEmail(connection.getEmail());
+
         if(a!=null){
             if(a.getMotDePasse().equals(connection.getPassword())){
                 return  true;

@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/activite")
+@CrossOrigin("*")
 public class ActiviteController {
     @Autowired
     ActiviteRepository activiteRepository;

@@ -33,6 +33,8 @@ public class EnfantAutisteController {
 
 
 
+
+
     @PutMapping ("/{id}/addActivite")
 public void addActiviteToEnfant(@RequestBody Activite activite, @PathVariable(name = "id") long id){
         EnfantAutiste enfantAutiste = enfantAutisteRepository.findById(id).get();
