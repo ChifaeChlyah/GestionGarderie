@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,9 +14,16 @@ import java.util.List;
 @NoArgsConstructor
 public class Activite {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nom;
     private String description;
     private double prix;
+
+    public Activite(String nom, String description, double prix) {
+        this.nom = nom;
+        this.description = description;
+        this.prix = prix;
+    }
+
 }

@@ -5,11 +5,9 @@ import com.ensa.gestiongarderie.entities.Paypal;
 import com.ensa.gestiongarderie.repositories.CarteDeCreditRepository;
 import com.ensa.gestiongarderie.repositories.PaypalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/paypal")
 public class PaypalController {

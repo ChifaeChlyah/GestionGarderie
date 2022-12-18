@@ -41,7 +41,7 @@ public class Enfant implements IEnfant{
         this.prenom=prenom;
         this.age=age;
     }
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Parent parent;
     public EnfantHyperactif convertToHyperactif()
     {

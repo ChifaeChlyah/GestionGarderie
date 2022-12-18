@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface ActiviteRepository extends JpaRepository<Activite,Long> {
-
+ public Activite findByNom(String nom);
 }
