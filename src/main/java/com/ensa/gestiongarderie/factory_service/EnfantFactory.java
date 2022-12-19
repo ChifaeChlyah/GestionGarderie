@@ -14,50 +14,6 @@ import java.lang.reflect.Type;
 @Service
 public class EnfantFactory {
     
-//    public Enfant getEnfant(Enfant enfant, TypeEnfant typeEnfant)
-//    {
-//        switch (typeEnfant)
-//        {
-//
-//            case ENFANT_AUTISTE:
-//            {
-//                return new EnfantAutiste(enfant);
-//            }
-//            case ENFANT_SURDOUE:
-//            {
-//                return new EnfantSurdoue(enfant);
-//            }
-//            case ENFANT_HYPERACTIF:
-//            {
-//                return new EnfantHyperactif(enfant);
-//            }
-//            case ENFANT_AUTISTE_ET_HYPERACTIF:
-//            {
-//                EnfantHyperactif enfantHyperactif=new EnfantHyperactif(enfant);
-//                return new EnfantAutiste(enfantHyperactif);
-//            }
-//            case ENFANT_HYPERACTIF_ET_SURDOUE:
-//            {
-//                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
-//                return new EnfantHyperactif(enfantSurdoue);
-//            }
-//            case ENFANT_AUTISTE_ET_SURDOUE:
-//            {
-//                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
-//                return new EnfantAutiste(enfantSurdoue);
-//            }
-//            case ENFANT_AUTIST_ET_HYPERACTIF_ET_SURDOUE:
-//            {
-//                EnfantSurdoue enfantSurdoue=new EnfantSurdoue(enfant);
-//                EnfantHyperactif enfantHyperactif=new EnfantHyperactif(enfantSurdoue);
-//                return new EnfantAutiste(enfantHyperactif);
-//            }
-//            default: {
-//                return enfant;
-//            }
-//        }
-//    }
-    
     @Autowired
     EnfantRepository enfantRepository;
     @Autowired
@@ -98,7 +54,6 @@ public class EnfantFactory {
         TypeEnfant typeEnfant=getTypeEnfant(enfant);
         switch (typeEnfant)
         {
-
             case ENFANT_AUTISTE:
             {
                 EnfantAutiste enfantAutiste= enfantAutisteRepository.findById(enfant.getId()).get();

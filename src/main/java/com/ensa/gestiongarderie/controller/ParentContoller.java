@@ -90,10 +90,10 @@ public class ParentContoller {
 
 
     @PostMapping(path="payer/{id}/{payementStrategy}")
-    public void payer(@PathVariable("id")Long idParent,@PathVariable("payementStrategy") String strategy,@RequestBody DonnessPayment donnessPayment)
+    public void payer(@PathVariable("id")Long idParent,@PathVariable("payementStrategy") String strategy,
+                      @RequestBody DonnessPayment donnessPayment)
     {
         PaymentStrategy paymentStrategy=payementStrategyFactory.getStrategy(strategy,donnessPayment);
-
         Parent parent=parentRepository.findById(idParent).get();
         IEnfant enfant=enfantFactory.getEnfant(parent.getEnfant());
         double prix=enfant.cout();

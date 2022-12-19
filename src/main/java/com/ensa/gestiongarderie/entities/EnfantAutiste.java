@@ -19,15 +19,12 @@ public class EnfantAutiste extends EnfantSpecial{
     long id;
     @ManyToOne
     private AideEducateur specialiste_Autisme;
-
     @OneToMany
     @JoinTable(name = "enfant_activites_autisme")
     private Collection<Activite> activitesSpeciales_autisme=new ArrayList<>();
-
     public EnfantAutiste(Enfant enfant) {
         super(enfant);
     }
-
     @Override
     public Double cout() {
         double cout=0;

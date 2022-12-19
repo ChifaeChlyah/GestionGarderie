@@ -16,13 +16,10 @@ public class EnfantHyperactif extends EnfantSpecial{
     @Id
     long id;
     @ManyToOne
-
     private AideEducateur specialiste_Hyperactivite;
-
     @OneToMany
     @JoinTable(name = "enfant_activites_hyperactif")
     private Collection<Activite> activitesSpeciales_hyperactifs=new ArrayList<>();
-
     public EnfantHyperactif(Enfant enfant) {
         super(enfant);
     }
@@ -32,7 +29,6 @@ public class EnfantHyperactif extends EnfantSpecial{
         for (Activite activite : activitesSpeciales_hyperactifs) {
             cout+=activite.getPrix();
         }
-
         cout+=tarifPyschologue;
         if(getEnfant()!=null)
             cout+=getEnfant().cout() ;

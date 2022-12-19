@@ -18,11 +18,9 @@ public class EnfantSurdoue extends EnfantSpecial{
     @Id
     long id;
     double quotientIntellectuel=150.;
-
     @OneToMany
     @JoinTable(name = "enfant_activites_surdoué")
     private Collection<Activite> activiteAdditionelles=new ArrayList<>();
-
     public EnfantSurdoue(Enfant enfant) {
         super(enfant);
     }

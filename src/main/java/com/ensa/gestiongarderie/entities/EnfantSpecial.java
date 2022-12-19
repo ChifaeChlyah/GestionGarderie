@@ -14,26 +14,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class EnfantSpecial implements IEnfant{
     long id;
     IEnfant enfant;
-
     @JsonIgnore @Transient
     final double tarifPyschologue=1000;
-
     public EnfantSpecial() {
     }
-
-
     public void setEnfant(IEnfant enfant) {
         this.enfant = enfant;
     }
-
     @Autowired
     EnfantRepository enfantRepository;
-
     public EnfantSpecial(Enfant enfant) {
         this.enfant=enfant;
     }
-
-
     public EnfantHyperactif convertToHyperactif()
     {
         EnfantHyperactif enfantHyperactif=new EnfantHyperactif();

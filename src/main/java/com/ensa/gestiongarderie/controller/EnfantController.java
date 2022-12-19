@@ -60,7 +60,6 @@ public class EnfantController {
     @PostMapping("/{type}")
     public boolean addEnfant(@RequestBody Enfant enf,@PathVariable(name = "type") TypeEnfant type )
     {
-//        Enfant enfant=enfantFactory.getEnfant(enf,type);
         if(enf.getAge()<=4)
             enf.setNiveau(niveauRepository.findByNom("Niveau 1"));
         else if(enf.getAge()>4&&enf.getAge()<=8)
@@ -69,7 +68,6 @@ public class EnfantController {
             enf.setNiveau(niveauRepository.findByNom("Niveau 3"));
         switch (type)
         {
-
             case ENFANT_AUTISTE:
             {
                 enfantRepository.save(enf);
